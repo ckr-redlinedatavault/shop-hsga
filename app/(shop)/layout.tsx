@@ -1,5 +1,7 @@
 import TopBanner from "@/components/TopBanner";
 import Navbar from "@/components/Navbar";
+import BottomBanner from "@/components/BottomBanner";
+import Footer from "@/components/Footer";
 
 export default function ShopLayout({
     children,
@@ -11,6 +13,8 @@ export default function ShopLayout({
             <TopBanner />
             <Navbar />
             {children}
+            <Footer />
+            <BottomBanner />
         </>
     );
 }
