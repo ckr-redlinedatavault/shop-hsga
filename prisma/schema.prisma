@@ -1,0 +1,66 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+model BulkOrder {
+  id              String   @id @default(cuid())
+  trackingId      String   @unique
+  institutionId   String
+  institutionName String
+  category        String
+  fileUrl         String?
+  contactPerson   String
+  phone           String
+  quantity        Int      @default(0)
+  status          String   @default("PENDING") // PENDING, PROCESSING, COMPLETED, SHIPPED, DELIVERED
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Product {
+  id                 String   @id @default(cuid())
+  name               String
+  description        String?
+  detailedDescription String?
+  price              Float
+  image              String?
+  category           String
+  type               String?  // Subcategory type
+  content            String?  // Content it has
+  sizes              String?  // Array of sizes like "S, M, L, XL, XXL" stored as comma separated string
+  inStock            Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model IdCardOrder {
+  id              String   @id @default(cuid())
+  trackingId      String   @unique
+  templateId      String
+  templateName    String
+  institutionName String
+  contactPerson   String
+  phone           String
+  email           String
+  quantity        Int
+  fileUrl         String?
+  address         String
+  city            String
+  state           String
+  pincode         String
+  status          String   @default("PENDING")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
